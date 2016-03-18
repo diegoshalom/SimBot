@@ -1,5 +1,5 @@
 import numpy as np
-from gasp import *
+#from gasp import *
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import matplotlib.animation
@@ -13,7 +13,7 @@ from source.estrategias.hamster import Hamster
 from source.estrategias.buscador_por_derecha import Buscador_por_derecha
 
 def main():
-    tamano_x, tamano_y = (10,10)
+    tamano_x, tamano_y = (30,30)
     entrada = (1,1)
     salida = (tamano_x-2,tamano_y-2)
     salida = (tamano_x-1,tamano_y-1)
@@ -27,7 +27,7 @@ def main():
 
     carga_inicial = 0
 
-    robot = Robot(ori_robot, pos_robot, hamster, carga_inicial)
+    robot = Robot(ori_robot, pos_robot, buscador_por_derecha , carga_inicial)
 
     laberinto = Laberinto(entrada, salida, tamano_x, tamano_y)
     ambiente = Ambiente(robot, laberinto)
@@ -40,8 +40,10 @@ def main():
     #grafico.visualizar()
 
     robot.salir_del_laberinto(ambiente)
-    
+    print len(robot.historia_posiciones)
     #end_graphics()
+    
+    #'mencoder mf://*.png -mf w=800:h=600:fps=25:type=png -ovc copy -oac copy -o output.avi'
 
 
 if __name__ == "__main__":

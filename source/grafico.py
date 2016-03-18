@@ -1,5 +1,5 @@
 import numpy as np 
-from gasp import *
+#from gasp import *
 from time import sleep
 
 class Grafico():

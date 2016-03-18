@@ -1,7 +1,8 @@
 '''
 Aca tenemos a HAL
 '''
-
+import matplotlib.pyplot as plt
+import matplotlib as mpl
 class Robot():
     '''
     Clase robot
@@ -28,7 +29,7 @@ class Robot():
         self.carga_inicial = carga_inicial
         self.bateria = carga_inicial
         self.mi_estrategia = estrategia
-
+        self.fig, self.axes = plt.subplots(figsize=(2,2))
     def rotar(self, giro):
         '''
 		Cambia la orientacion del Robot.
@@ -113,7 +114,8 @@ class Robot():
             self.mi_estrategia.decidir(self,un_ambiente)
             posicion_sin_avanzar=self.posicion.copy()
             giro = self.giroscopo.copy()
-            visualiza_ascii(un_ambiente)
+            #visualiza_ascii(un_ambiente)
+            visualiza_mpl(un_ambiente)
     
     def consumo_bateria(self,accion):
         '''
@@ -165,5 +167,30 @@ def visualiza_ascii(un_ambiente):
                 else:                    
                     print un_ambiente.matriz[i,j],
         print " "
-            
-            
+
+def visualiza_mpl(un_ambiente):    
+    '''
+    Visualiza el laberinto en modo texto.     
+    
+    Parametros
+    -----------
+    un_ambiente: objeto Ambiente
+			Instancia del objeto Ambiente creada por main. Es el laberinto en el
+        cual se mueve el robot.
+    '''
+    mpl.interactive(True)
+    axes=un_ambiente.robot.axes    
+    fig=un_ambiente.robot.fig
+    axes.set_xlabel('posx')
+    axes.set_ylabel('posy')
+    axes.set_title('laberinto')
+    plt.xticks([])
+    plt.yticks([])
+    mat=un_ambiente.matriz.copy()
+    pos=un_ambiente.robot.posicion
+    mat[pos[0],pos[1]] = 4
+    plt.imshow(mat)
+    
+    img_name = './anim/im%04d.png' % len(un_ambiente.robot.historia_posiciones)
+    fig.savefig(img_name)
+    
