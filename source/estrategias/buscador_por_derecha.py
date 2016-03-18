@@ -23,30 +23,3 @@ class Buscador_por_derecha(Estrategia):
             else:
                 self.robot.rotar("izquierda")
 
-'''                
-        if self.robot.sensar(un_ambiente) == 0:                
-            self.robot.rotar("izquierda")
-            self.robot.mover(un_ambiente)
-
-
-
-        if self.robot.sensar(un_ambiente) == 0:
-            self.robot.rotar("izquierda")
-            self.robot.mover(un_ambiente)
-            
-        else:
-            self.robot.rotar("derecha")
-            if self.robot.sensar(un_ambiente) == 0:
-                self.robot.rotar("izquierda")
-                self.robot.mover(un_ambiente)
-            else:
-                self.robot.mover(un_ambiente)
-'''
-
-
-def rotacion_aleatoria(robot):
-    numero = random()
-    if numero > 1/2.:
-        robot.rotar("izquierda")
-    else:
-        robot.rotar("derecha")                    

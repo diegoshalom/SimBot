@@ -12,8 +12,12 @@ from source.laberintos.deep_first_search import Laberinto
 from source.estrategias.hamster import Hamster
 from source.estrategias.buscador_por_derecha import Buscador_por_derecha
 
+import random
+random.seed(0)
+np.random.seed(1)
+
 def main():
-    tamano_x, tamano_y = (30,30)
+    tamano_x, tamano_y = (100,100)
     entrada = (1,1)
     salida = (tamano_x-2,tamano_y-2)
     salida = (tamano_x-1,tamano_y-1)

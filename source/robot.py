@@ -29,7 +29,7 @@ class Robot():
         self.carga_inicial = carga_inicial
         self.bateria = carga_inicial
         self.mi_estrategia = estrategia
-        self.fig, self.axes = plt.subplots(figsize=(2,2))
+        self.fig, self.axes = plt.subplots(figsize=(4,4))
     def rotar(self, giro):
         '''
 		Cambia la orientacion del Robot.
@@ -115,7 +115,7 @@ class Robot():
             posicion_sin_avanzar=self.posicion.copy()
             giro = self.giroscopo.copy()
             #visualiza_ascii(un_ambiente)
-            visualiza_mpl(un_ambiente)
+            #visualiza_mpl(un_ambiente)
     
     def consumo_bateria(self,accion):
         '''
@@ -178,19 +178,32 @@ def visualiza_mpl(un_ambiente):
 			Instancia del objeto Ambiente creada por main. Es el laberinto en el
         cual se mueve el robot.
     '''
-    mpl.interactive(True)
-    axes=un_ambiente.robot.axes    
-    fig=un_ambiente.robot.fig
-    axes.set_xlabel('posx')
-    axes.set_ylabel('posy')
-    axes.set_title('laberinto')
+    import time
+    #mpl.interactive(True)
+    #axes=un_ambiente.robot.axes    
+
+
+    fig,axes=plt.subplots(figsize=(4,4))
+    #fig=un_ambiente.robot.fig
+    #plt.cla
+    #plt.clf
+    
+    
+    #axes.set_xlabel('posx')
+    #axes.set_ylabel('posy')
+    #axes.set_title('laberinto')
     plt.xticks([])
     plt.yticks([])
     mat=un_ambiente.matriz.copy()
     pos=un_ambiente.robot.posicion
     mat[pos[0],pos[1]] = 4
+    plt.set_cmap('gray')
     plt.imshow(mat)
+    axes.set_position([0,0,1,1])
     
     img_name = './anim/im%04d.png' % len(un_ambiente.robot.historia_posiciones)
+    t = time.time()
     fig.savefig(img_name)
+    print len(un_ambiente.robot.historia_posiciones),time.time() - t
+    
     
